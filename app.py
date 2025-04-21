@@ -1,18 +1,10 @@
-
-from ultralytics import YOLO
-
-model = YOLO('model.pt')
-model.save('model_safe.pt')  # This creates a safer version# try:
-
 import streamlit as st
 from PIL import Image
 import numpy as np
 import cv2
 import tempfile
-import io
 import os
-import torch
-from ultralytics import YOLO
+import io
 
 # Set page config
 st.set_page_config(page_title="Apple Detection", page_icon="🍏", layout="wide")
@@ -29,89 +21,14 @@ confidence_threshold = st.sidebar.slider("Confidence Threshold", 0.0, 1.0, 0.5, 
 @st.cache_resource
 def load_model():
     try:
-        # Safe loading for PyTorch 2.6+
-        with torch.serialization.safe_globals([torch.nn.Module]):
-            model = YOLO('model.pt')
+        from ultralytics import YOLO
+        model = YOLO('model.pt')
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
 
 model = load_model()
-
-# Rest of your existing code...
-
-#     import cv2
-#     from PIL import Image
-#     import numpy as np
-#     import tempfile
-#     import os
-#     from ultralytics import YOLO
-# except ImportError as e:
-#     import streamlit as st
-#     st.error(f"Import error: {e}. Please check the requirements.txt file.")
-#     st.stop()
-
-
-
-# import os
-# import sys
-# import streamlit as st
-# from PIL import Image
-# import numpy as np
-# import tempfile
-# import io
-
-# # Check dependencies
-# try:
-#     import cv2
-#     from ultralytics import YOLO
-# except ImportError as e:
-#     st.error(f"Import error: {e}. Please check the requirements.txt file.")
-#     st.stop()
-# except Exception as e:
-#     st.error(f"Unexpected error: {e}")
-#     st.stop()
-
-
-
-
-# Rest of your app code...
-
-# import streamlit as st
-# from PIL import Image
-# import numpy as np
-# import cv2
-# import tempfile
-# import io
-# import os
-
-
-
-
-# Set page config
-# st.set_page_config(page_title="Apple Detection", page_icon="🍏", layout="wide")
-
-# # Title and description
-# st.title("🍏 Apple Detection with YOLOv8")
-# st.write("Upload an image or video to detect apples using your trained YOLOv8 model.")
-
-# # Sidebar for settings
-# st.sidebar.header("Settings")
-# confidence_threshold = st.sidebar.slider("Confidence Threshold", 0.0, 1.0, 0.5, 0.01)
-
-# # Function to load the YOLOv8 model
-# @st.cache_resource
-# def load_model():
-#     try:
-#         from ultralytics import YOLO
-#         model = YOLO('model.pt')
-#         return model
-#     except Exception as e:
-#         st.error(f"Error loading model: {e}")
-#         return None
-
-# model = load_model()
 
 # Function to process image
 def process_image(image, confidence):
