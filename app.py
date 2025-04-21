@@ -1,14 +1,34 @@
+# try:
+#     import cv2
+#     from PIL import Image
+#     import numpy as np
+#     import tempfile
+#     import os
+#     from ultralytics import YOLO
+# except ImportError as e:
+#     import streamlit as st
+#     st.error(f"Import error: {e}. Please check the requirements.txt file.")
+#     st.stop()
+
+import os
+import sys
+import streamlit as st
+from PIL import Image
+import numpy as np
+import tempfile
+
+# Check dependencies
 try:
     import cv2
-    from PIL import Image
-    import numpy as np
-    import tempfile
-    import os
     from ultralytics import YOLO
 except ImportError as e:
-    import streamlit as st
     st.error(f"Import error: {e}. Please check the requirements.txt file.")
     st.stop()
+except Exception as e:
+    st.error(f"Unexpected error: {e}")
+    st.stop()
+
+# Rest of your app code...
 
 # import streamlit as st
 # from PIL import Image
