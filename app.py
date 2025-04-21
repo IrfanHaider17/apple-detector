@@ -29,20 +29,6 @@ except Exception as e:
     st.error(f"Unexpected error: {e}")
     st.stop()
 
-from ultralytics import YOLO
-import torch
-
-@st.cache_resource
-def load_model():
-    try:
-        # Add safe globals for YOLO models
-        with torch.serialization.safe_globals([torch.nn.Module]):
-            model = YOLO('model.pt')
-        return model
-    except Exception as e:
-        st.error(f"Error loading model: {e}")
-        return None
-
 # Rest of your app code...
 
 # import streamlit as st
