@@ -1,10 +1,22 @@
-import streamlit as st
-from PIL import Image
-import numpy as np
-import cv2
-import tempfile
-import io
-import os
+try:
+    import cv2
+    from PIL import Image
+    import numpy as np
+    import tempfile
+    import os
+    from ultralytics import YOLO
+except ImportError as e:
+    import streamlit as st
+    st.error(f"Import error: {e}. Please check the requirements.txt file.")
+    st.stop()
+
+# import streamlit as st
+# from PIL import Image
+# import numpy as np
+# import cv2
+# import tempfile
+# import io
+# import os
 
 # Set page config
 st.set_page_config(page_title="Apple Detection", page_icon="🍏", layout="wide")
